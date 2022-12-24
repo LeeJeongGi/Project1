@@ -1,5 +1,6 @@
 package com.project.api.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -16,5 +17,6 @@ public class CommentsForm {
     private Long articleId;
 
     @NotBlank(message = "댓글 내용은 필수 입력 값입니다.")
+    @JsonProperty("commentsContents")
     private String contents;
 }

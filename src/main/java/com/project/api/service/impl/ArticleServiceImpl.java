@@ -102,6 +102,10 @@ public class ArticleServiceImpl implements ArticleService {
             throw new IllegalArgumentException(NOT_DELETE_ARTICLE);
         }
 
+        // 최초 작성시 작성자 +3점을 획득하기 때문에 작성자 -3점
+        article.writerMinusPoint(WRITE_POINT);
+        articleRepository.save(article);
+
         List<Comments> comments = commentsRepository.findByArticleId(article.getId());
         for (int i = 0; i < comments.size(); i++) {
             comments.get(i).minusPoint(WRITER_POINT);
