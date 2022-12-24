@@ -1,9 +1,6 @@
 package com.project.api.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -31,6 +28,20 @@ public class Member implements UserDetails {
     private String userName;
 
     private int points;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Article> articles;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Comments> comments;
+
+    public void plusPoint(int value) {
+        this.points += value;
+    }
+
+    public void minusPoint(int value) {
+        this.points -= value;
+    }
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
