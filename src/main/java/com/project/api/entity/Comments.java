@@ -25,4 +25,8 @@ public class Comments {
     private Member member;
 
     private String contents;
+
+    public void minusPoint(int points) {
+        member.minusPoint(points);
+    }
 }
