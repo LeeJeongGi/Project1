@@ -5,6 +5,7 @@ import com.project.api.dto.response.TokenInfo;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +27,8 @@ public class JwtTokenProvider {
 
     private static final String BEARER_TYPE = "Bearer";
 
-    private String secretKey = "JwtToken";
+    @Value("${jwt.secret}")
+    private String secretKey;
 
     private static final long ACCESS_TOKEN_EXPIRE_TIME = 30 * 60 * 1000L; // 30분
 
