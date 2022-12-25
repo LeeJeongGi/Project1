@@ -15,6 +15,8 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends GenericFilterBean {
 
+    private final static String TOKEN_PREFIX = "Bearer ";
+
     private final JwtTokenProvider jwtTokenProvider;
 
     @Override
@@ -22,9 +24,15 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
         String token = jwtTokenProvider.resolveToken((HttpServletRequest) request);
 
-        if (token != null && jwtTokenProvider.validateToken(token)) {
-            Authentication authentication = jwtTokenProvider.getAuthentication(token);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+        if (token != null) {
+            if (token.startsWith(TOKEN_PREFIX)) {
+                token = token.substring(TOKEN_PREFIX.length());
+            }
+
+            if (jwtTokenProvider.validateToken(token)) {
+                Authentication authentication = jwtTokenProvider.getAuthentication(token);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
         }
 
         chain.doFilter(request, response);

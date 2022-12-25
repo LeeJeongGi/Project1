@@ -8,6 +8,8 @@ import com.project.api.dto.response.MemberInfo;
 import com.project.api.dto.response.TokenInfo;
 import com.project.api.entity.Member;
 import com.project.api.service.MemberService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/signup")
+    @Operation(summary = "회원 가입", description = "회원 가입을 위한 API.")
     public ApiResult<String> createMember(@RequestBody @Valid MemberForm memberForm) {
         return success(
                 memberService.saveMember(memberForm)
@@ -33,6 +36,7 @@ public class MemberController {
     }
 
     @PostMapping("/signin")
+    @Operation(summary = "로그인", description = "로그인을 위한 API.")
     public ApiResult<TokenInfo> login(@RequestBody @Valid LoginForm loginForm) {
         return success(
                 memberService.login(loginForm)
@@ -40,6 +44,7 @@ public class MemberController {
     }
 
     @GetMapping("/profile")
+    @Operation(summary = "회원 조회", description = "회사 조회를 위한 API.", security = { @SecurityRequirement(name = "bearer-key")})
     public ApiResult<MemberInfo> getMemberProfile() {
         Authentication authentication = CommonUtils.getAuthentication();
         Member member = (Member) authentication.getPrincipal();
@@ -50,6 +55,7 @@ public class MemberController {
     }
 
     @GetMapping("/points")
+    @Operation(summary = "포인트 조회", description = "회원의 포인트를 조회하는 API.", security = { @SecurityRequirement(name = "bearer-key")})
     public ApiResult<MemberInfo> getMemberPoints() {
         Authentication authentication = CommonUtils.getAuthentication();
         Member member = (Member) authentication.getPrincipal();

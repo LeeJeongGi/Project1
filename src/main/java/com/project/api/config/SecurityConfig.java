@@ -19,6 +19,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final String[] swaggerPermitUrl = { "/swagger-ui/**", "/v3/api-docs/**", "/v2/api-docs/**", "/swagger-resources/**",
+            "/webjars/**", "/api-docs/**", "/configuration/**", "/favicon.ico" };
+
     private final JwtTokenProvider jwtTokenProvider;
 
     @Override
@@ -30,14 +33,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests() // 요청에 대한 사용권한 체크
-                .antMatchers("/swagger-ui/**", "h2-console/**").permitAll()
-                .antMatchers("/signup", "/signin").permitAll()
-                .anyRequest().authenticated()
+                    .antMatchers(swaggerPermitUrl).permitAll()
+                    .antMatchers("h2-console/**").permitAll()
+                    .antMatchers("/signup", "/signin").permitAll()
+                    .anyRequest().authenticated()
                 .and()
-                .exceptionHandling()
-                .authenticationEntryPoint(new RestAuthenticationEntryPoint())
+                    .exceptionHandling()
+                    .authenticationEntryPoint(new RestAuthenticationEntryPoint())
                 .and()
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
+                    .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
                         UsernamePasswordAuthenticationFilter.class);
     }
 
