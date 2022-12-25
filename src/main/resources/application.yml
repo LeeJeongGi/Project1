@@ -20,5 +20,4 @@ spring:
 
 # jwt secret key 설정
 jwt:
-  secret: validSecretKey
-  refresh-secret: refreshSecretKey
+  secret: '5597b93a2843078cbb0c920ae41dfe20f1685e10c67e423c11ab91adfc319d12'
