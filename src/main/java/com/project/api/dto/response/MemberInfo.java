@@ -1,9 +1,12 @@
 package com.project.api.dto.response;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MemberInfo {
 
     private String userId;
@@ -12,10 +15,4 @@ public class MemberInfo {
 
     private int points;
 
-    @Builder
-    public MemberInfo(String userId, String userName, int points) {
-        this.userId = userId;
-        this.userName = userName;
-        this.points = points;
-    }
 }

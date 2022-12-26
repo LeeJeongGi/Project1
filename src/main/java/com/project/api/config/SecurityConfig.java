@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final String[] swaggerPermitUrl = { "/swagger-ui/**", "/v3/api-docs/**", "/v2/api-docs/**", "/swagger-resources/**",
+    private final String[] swaggerPermitUrl = { "/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**",
             "/webjars/**", "/api-docs/**", "/configuration/**", "/favicon.ico" };
 
     private final JwtTokenProvider jwtTokenProvider;
@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests() // 요청에 대한 사용권한 체크
+                .authorizeRequests()
                     .antMatchers(swaggerPermitUrl).permitAll()
                     .antMatchers("h2-console/**").permitAll()
                     .antMatchers("/signup", "/signin").permitAll()

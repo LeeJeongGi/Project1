@@ -10,7 +10,6 @@ import com.project.api.entity.Member;
 import com.project.api.repository.ArticleRepository;
 import com.project.api.repository.CommentsRepository;
 import com.project.api.repository.MemberRepository;
-import com.project.api.service.impl.MemberServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,9 +44,6 @@ public class ArticleControllerTest {
 
     @Autowired
     private CommentsRepository commentsRepository;
-
-    @Autowired
-    private MemberServiceImpl memberService;
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;

@@ -67,9 +67,6 @@ public class CommentsServiceImplTest {
         // when
         List<Long> commentsId = commentsService.saveComments(form, commentMember.getUserId());
 
-        Comments comments = commentsRepository.findById(commentsId.get(0))
-                .orElseThrow(() -> new NotFoundException(""));
-
         Member findMember = memberRepository.findByUserId(member.getUserId())
                 .orElseThrow(() -> new NotFoundException(""));
 

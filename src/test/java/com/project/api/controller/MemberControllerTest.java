@@ -155,6 +155,60 @@ public class MemberControllerTest {
     }
 
     @Test
+    @DisplayName("회원 로그인시 아이디 입력 안하면 에러 발생 테스트")
+    void loginMemberErrorId() throws Exception {
+        //given
+        MemberForm member = MemberForm.builder()
+                .userId("jeonggi")
+                .pw("1234")
+                .userName("이정기")
+                .build();
+
+        memberService.saveMember(member);
+
+        LoginForm loginForm = LoginForm.builder()
+                .pw(member.getPw())
+                .build();
+
+        String json = objectMapper.writeValueAsString(loginForm);
+
+        // expected
+        mockMvc.perform(post("/signin")
+                        .contentType(APPLICATION_JSON)
+                        .content(json)
+                )
+                .andExpect(status().isBadRequest())
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("회원 로그인시 비밀번호 입력 안하면 에러 발생 테스트")
+    void loginMemberErrorPassword() throws Exception {
+        //given
+        MemberForm member = MemberForm.builder()
+                .userId("jeonggi")
+                .pw("1234")
+                .userName("이정기")
+                .build();
+
+        memberService.saveMember(member);
+
+        LoginForm loginForm = LoginForm.builder()
+                .userId(member.getUserId())
+                .build();
+
+        String json = objectMapper.writeValueAsString(loginForm);
+
+        // expected
+        mockMvc.perform(post("/signin")
+                        .contentType(APPLICATION_JSON)
+                        .content(json)
+                )
+                .andExpect(status().isBadRequest())
+                .andDo(print());
+    }
+
+    @Test
     @DisplayName("회원 조회 테스트")
     void getMemberProfile() throws Exception {
         //given
@@ -216,7 +270,7 @@ public class MemberControllerTest {
     }
 
     @Test
-    @DisplayName("회원 포링트 조회 테스트")
+    @DisplayName("회원 포인트 조회 테스트")
     void getMemberPoints() throws Exception {
         //given
         MemberForm member = MemberForm.builder()

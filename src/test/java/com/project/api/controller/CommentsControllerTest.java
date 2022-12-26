@@ -11,7 +11,6 @@ import com.project.api.repository.ArticleRepository;
 import com.project.api.repository.CommentsRepository;
 import com.project.api.repository.MemberRepository;
 import com.project.api.service.impl.CommentsServiceImpl;
-import com.project.api.service.impl.MemberServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,9 +44,6 @@ public class CommentsControllerTest {
 
     @Autowired
     private CommentsRepository commentsRepository;
-
-    @Autowired
-    private MemberServiceImpl memberService;
 
     @Autowired
     CommentsServiceImpl commentsService;
