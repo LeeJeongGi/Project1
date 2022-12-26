@@ -1,7 +1,7 @@
 # 구현 API
 ## Swagger : http://localhost:8080/swagger-ui/index.html
 
-## Schema DDl
+## Schema DDL
 CREATE TABLE member (
     user_id varchar(255) not null,
     created_at timestamp,
