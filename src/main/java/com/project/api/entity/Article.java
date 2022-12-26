@@ -1,7 +1,10 @@
 package com.project.api.entity;
 
 import com.project.api.dto.request.ArticleForm;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,11 +14,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Article {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Article extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
