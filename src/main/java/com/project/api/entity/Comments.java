@@ -23,7 +23,7 @@ public class Comments extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
-    @Column(length = 500)
+    @Column(length = 500, nullable = false)
     private String contents;
 
     @CreatedDate

@@ -33,6 +33,7 @@ public class Member implements UserDetails {
     @Column(nullable = false)
     private String pw;
 
+    @Column(nullable = false)
     private String userName;
 
     private int points;
