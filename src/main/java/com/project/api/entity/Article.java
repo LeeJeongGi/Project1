@@ -21,6 +21,7 @@ public class Article extends BaseEntity {
 
     private String title;
 
+    @Lob
     private String contents;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "article", cascade = CascadeType.REMOVE)
